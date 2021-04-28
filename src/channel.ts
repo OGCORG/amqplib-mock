@@ -10,66 +10,7 @@ import Bluebird from 'bluebird'
 import events from 'events'
 import { Replies } from './replies'
 
-export class Channel implements AmqplibChannel, events.EventEmitter {
-  addListener(
-    event: string | symbol,
-    listener: (...args: any[]) => void
-  ): this {
-    throw new Error('Method not implemented.')
-  }
-  on(event: string | symbol, listener: (...args: any[]) => void): this {
-    throw new Error('Method not implemented.')
-  }
-  once(event: string | symbol, listener: (...args: any[]) => void): this {
-    throw new Error('Method not implemented.')
-  }
-  removeListener(
-    event: string | symbol,
-    listener: (...args: any[]) => void
-  ): this {
-    throw new Error('Method not implemented.')
-  }
-  off(event: string | symbol, listener: (...args: any[]) => void): this {
-    throw new Error('Method not implemented.')
-  }
-  removeAllListeners(event?: string | symbol): this {
-    throw new Error('Method not implemented.')
-  }
-  setMaxListeners(n: number): this {
-    throw new Error('Method not implemented.')
-  }
-  getMaxListeners(): number {
-    throw new Error('Method not implemented.')
-  }
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  listeners(event: string | symbol): Function[] {
-    throw new Error('Method not implemented.')
-  }
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  rawListeners(event: string | symbol): Function[] {
-    throw new Error('Method not implemented.')
-  }
-  emit(event: string | symbol, ...args: any[]): boolean {
-    throw new Error('Method not implemented.')
-  }
-  listenerCount(event: string | symbol): number {
-    throw new Error('Method not implemented.')
-  }
-  prependListener(
-    event: string | symbol,
-    listener: (...args: any[]) => void
-  ): this {
-    throw new Error('Method not implemented.')
-  }
-  prependOnceListener(
-    event: string | symbol,
-    listener: (...args: any[]) => void
-  ): this {
-    throw new Error('Method not implemented.')
-  }
-  eventNames(): (string | symbol)[] {
-    throw new Error('Method not implemented.')
-  }
+export class Channel extends events.EventEmitter implements AmqplibChannel {
   ack(message: Message, allUpTo?: boolean): void {}
 
   ackAll(): void {}
