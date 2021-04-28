@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "./node_modules/typescript/bin/tsc && node dist/main.js",
     "build": "./node_modules/typescript/bin/tsc --build",
-    "clean": "./node_modules/typescript/bin/tsc --build --clean"
+    "clean": "./node_modules/typescript/bin/tsc --build --clean",
+    "test": "./node_modules/typescript/bin/tsc && ./node_modules/.bin/ts-mocha"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,22 @@
   },
   "devDependencies": {
     "@types/amqplib": "^0.5.17",
+    "@types/mocha": "^8.2.2",
+    "mocha": "^8.3.2",
+    "ts-mocha": "^8.0.0",
     "typescript": "^4.2.4"
+  },
+  "mocha": {
+    "bail": true,
+    "check-leaks": true,
+    "exit": true,
+    "full-trace": true,
+    "slow": 500,
+    "timeout": 60000,
+    "spec": "src/**/*.spec.ts",
+    "parallel": true,
+    "extension": [
+      "ts"
+    ]
   }
 }
