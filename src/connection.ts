@@ -1,6 +1,7 @@
 import {
   ServerProperties as AmqplibServerProperties,
-  Connection as AmqplibConnection
+  Connection as AmqplibConnection,
+  Options
 } from 'amqplib'
 import Bluebird from 'bluebird'
 import events from 'events'
@@ -88,4 +89,11 @@ export class Connection implements AmqplibConnection, events.EventEmitter {
   createConfirmChannel(): Bluebird<ConfirmChannel> {
     return Bluebird.resolve(new ConfirmChannel())
   }
+}
+
+export function connect(
+  url: string | Options.Connect,
+  socketOptions?: any
+): Bluebird<Connection> {
+  return Bluebird.resolve(new Connection())
 }
