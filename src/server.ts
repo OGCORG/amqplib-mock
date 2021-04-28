@@ -1,15 +1,16 @@
-import { ServerProperties as AmqplibServerProperties } from "amqplib/properties";
+import { ServerProperties as AmqplibServerProperties } from 'amqplib/properties'
 
 export class ServerProperties implements AmqplibServerProperties {
-  [key: string]: string | undefined;
+  // eslint-disable-next-line no-undef
+  [key: string]: string | undefined
 
-  host: string;
-  information: string;
-  platform: string;
-  product: string;
-  version: string;
+  host: string
+  information: string
+  platform: string
+  product: string
+  version: string
 
-  constructor () {
+  constructor() {
     this.host = ''
     this.information = ''
     this.platform = ''

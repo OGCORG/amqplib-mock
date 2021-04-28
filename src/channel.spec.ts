@@ -1,4 +1,4 @@
-import { Connection } from "./connection";
+import { Connection } from './connection'
 
 describe(`${__filename}`, () => {
   it('test channel', async () => {
