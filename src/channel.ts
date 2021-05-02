@@ -8,6 +8,7 @@ import {
 } from 'amqplib'
 import Bluebird from 'bluebird'
 import events from 'events'
+import { QueueManager } from './queue-manager'
 import { Replies } from './replies'
 
 export class Channel extends events.EventEmitter implements AmqplibChannel {
@@ -29,7 +30,7 @@ export class Channel extends events.EventEmitter implements AmqplibChannel {
     queue: string,
     options?: Options.AssertQueue
   ): Bluebird<Replies.AssertQueue> {
-    return Bluebird.resolve(new Replies.AssertQueue())
+    return Bluebird.resolve(QueueManager.assert(queue))
   }
 
   // @ts-ignore
@@ -137,7 +138,8 @@ export class Channel extends events.EventEmitter implements AmqplibChannel {
     content: Buffer,
     options?: Options.Publish
   ): boolean {
-    return false
+    QueueManager.send(queue, content)
+    return true
   }
 
   // @ts-ignore
@@ -178,7 +180,8 @@ export class ConfirmChannel extends Channel implements AmqplibConfirmChannel {
     options?: Options.Publish,
     callback?: (err: any, ok: Replies.Empty) => void
   ): boolean {
-    return false
+    QueueManager.send(queue, content)
+    return true
   }
 
   // @ts-ignore

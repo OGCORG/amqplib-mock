@@ -5,7 +5,9 @@
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc --build",
     "clean": "./node_modules/typescript/bin/tsc --build --clean",
-    "test": "./node_modules/.bin/eslint --fix && ./node_modules/typescript/bin/tsc && ./node_modules/.bin/ts-mocha"
+    "lint": "./node_modules/.bin/eslint \"src/**/*.ts\" --fix",
+    "test": "./node_modules/.bin/ts-mocha 'src/**/*.spec.ts'",
+    "test:full": " npm run lint && ./node_modules/typescript/bin/tsc --no-emit && npm test"
   },
   "repository": {
     "type": "git",

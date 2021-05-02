@@ -1,7 +1,7 @@
 import {
-  ServerProperties as AmqplibServerProperties,
   Connection as AmqplibConnection,
-  Options
+  Options,
+  ServerProperties as AmqplibServerProperties
 } from 'amqplib'
 import Bluebird from 'bluebird'
 import events from 'events'
