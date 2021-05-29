@@ -8,6 +8,7 @@ import {
 } from 'amqplib'
 import Bluebird from 'bluebird'
 import events from 'events'
+import { v4 } from 'uuid'
 import { QueueManager } from './queue-manager'
 import { Replies } from './replies'
 
@@ -70,16 +71,21 @@ export class Channel extends events.EventEmitter implements AmqplibChannel {
 
   // @ts-ignore
   close(): Bluebird<void> {
+    QueueManager.destroy()
     return Bluebird.resolve()
   }
 
+  // todo: implement options later
   // @ts-ignore
   consume(
     queue: string,
     onMessage: (msg: ConsumeMessage | null) => void,
     options?: Options.Consume
   ): Bluebird<Replies.Consume> {
-    return Bluebird.resolve(new Replies.Consume())
+    const consumer = new Replies.Consume()
+    consumer.consumerTag = v4()
+    QueueManager.consume(queue, consumer.consumerTag, onMessage)
+    return Bluebird.resolve(consumer)
   }
 
   // @ts-ignore
@@ -133,13 +139,14 @@ export class Channel extends events.EventEmitter implements AmqplibChannel {
 
   reject(message: Message, requeue?: boolean): void {}
 
+  // @ts-ignore
   sendToQueue(
     queue: string,
     content: Buffer,
     options?: Options.Publish
-  ): boolean {
+  ): Bluebird<boolean> {
     QueueManager.send(queue, content)
-    return true
+    return Bluebird.resolve(true)
   }
 
   // @ts-ignore
